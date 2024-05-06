@@ -3,7 +3,7 @@ import MyInput from "./UI/input/MyInput";
 import MyButton from "./UI/button/MyButton";
 
 const PostForm = ({create}) => {
-    const [post, setPost] = useState({title: '', body: ''})
+    const [post, setPost] = useState({label: '', ingredients: []})
 
 
     const addNewPost = (e) => {
@@ -12,26 +12,24 @@ const PostForm = ({create}) => {
             ...post, id: Date.now()
         }
         create(newPost)
-        setPost({title: '', body: ''})
+        setPost({label: '', ingredients: []})
     }
 
     return (
         <form>
-            {/*Управляемый компонент*/}
             <MyInput
-                value={post.title}
-                onChange={e => setPost({...post, title: e.target.value})}
+                value={post.label}
+                onChange={e => setPost({...post, label: e.target.value})}
                 type="text"
-                placeholder="Название поста"
+                placeholder="Name of the recipe"
             />
-            {/*Неуправляемый\Неконтролируемый компонент*/}
             <MyInput
-                value={post.body}
-                onChange={e => setPost({...post, body: e.target.value})}
+                value={[post.ingredients]}
+                onChange={e => setPost({...post, ingredients: [e.target.value]})}
                 type="text"
-                placeholder="Описание поста"
+                placeholder="Description"
             />
-            <MyButton onClick={addNewPost}>Создать пост</MyButton>
+            <MyButton onClick={addNewPost}>Add receip</MyButton>
         </form>
     );
 };
